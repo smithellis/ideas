@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>CVM Innovation Catalyzer</title>
+  <meta name="description" content="The UGA College of Veterinary Medicine works better when everyone tries to make it better.  Use this form to share your ideas.">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+</head>
+<body>
+
+<div class="container">
+  <div class="twelve columns">
+    <img src="{{ url_for('static',filename='logo.webp') }}" alt="CVM Logo">
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="twelve columns">
+    <h1>Idea Engine: <i>Innovating the CVM</i></h1>
+  </div>
+</div>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <nav class="navbar">
+  <div class="container">
+    <ul class="navbar-list">
+      <li class="navbar-item"><a class="navbar-link" href="{{ url_for('home') }}">Home/Submit Idea</a></li>
+      <li class="navbar-item"><a class="navbar-link" href="{{ url_for('vote') }}">Vote On Entries</a></li>
+      <li class="navbar-item"><a class="navbar-link" href="{{ url_for('activeIdeas') }}">See Active Ideas</a></li>
+      <li class="navbar-item"><a class="navbar-link" href="{{ url_for('feedback') }}">Leave Feedback</a></li>
+      <li class="navbar-item"><a class="navbar-link" href="{{ url_for('faq') }}">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="ten columns">
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      </div>
+    </div>
+</div>
+
+{% block body %}
+{% endblock %}
+
+<div class="container">
+  <div class="row footrow">
+    <div class="four columns footpart">
+    <p>Area one is here.  For the footer.  Area one.  Right here.</p>
+    </div>
+    <div class="four columns footpart">
+    <p>Area two is here.  For the footer.  Area one.  Right here.</p>
+    </div>
+    <div class="four columns footpart">
+    <p>Area three is here.  For the footer.  Area one.  Right here.</p>
+    </div>
+  </div>
+</div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

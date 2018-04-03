@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="ten columns" style="margin-top: 5%">
+        <h1>Active Ideas</h1>
+        <p>The following ideas are being <strong>actively worked on right now</strong>!  If you want to get involved in the project or learn more, click "Contact Project Leader" and reach out!</p>
+        <hr>
+      </div>
+    </div>
+
+<!-- If No Projects Yet -->
+
+<div class="row">
+  <div class="ten columns" style="margin-top: 5%">
+    <h2>Nothing Yet!</h2>
+    <p>You'd see this part if there were no ideas approved yet.  You'd see the below project if there was an approved project.</p>
+    <hr>
+  </div>
+</div>
+
+<!-- Project Start -->
+    <div class="row project">
+      <div class="six columns">
+        <h2>Idea One Name</h2>
+        <h3>Description of Idea</h3>
+        <p>Idea details would go right here.  This is where they would be.  Idea details would go right here.  This is where they would be.  Idea details would go right here.  This is where they would be.  Idea details would go right here.  This is where they would be.</p>
+        <p><small>Project Accepted On: 02/03/2018<br>
+        Department/Unit/Lab Affected: Web Development</small></p>
+      </div>
+      <div class="six columns">
+        <p class="button button-primary">968 Votes Were Received</p>
+        <p><a href="" class="button">Contact Project Leader</a></p>
+      </div>
+    </div>
+<!-- Project End -->
+  </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="ten columns" style="margin-top: 5%">
+        <h1>I Have Feedback!</h1>
+        <p>So you tried to use this thing, and you have a concern or suggestion about the tool that collects suggestions...INCEPTION.  Kidding!  We need your feedback about this tool to make it better.  Please let us know your thoughts!</p>
+        <form class="feedback_form" action="" method="post" name="feedback_form">
+        <label for="feedback">My Feedback Is:</label>
+        <textarea name="feedback" cols="50" rows="10"></textarea>
+        <label for="fullname">My Name Is ( you don't have to tell us, but it makes it easier to follow up if we need to ):</label>
+        <input type="text" name="fullname">
+      </div>
+    </div>
+    <div class="row">
+      <div class="ten columns">
+        <label for="email">Email ( you don't have to tell us this, either ):</label>
+        <input type="email" name="email">
+      </div>
+
+      <div class="row">
+        <div class="ten columns">
+        <input class="button-primary" type="submit" value="Share My Feedback">
+        </div>
+        </form>
+      </div>
+  </div>
+</div>
+{% endblock %}

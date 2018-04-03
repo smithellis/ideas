@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <div class="container">
+    <div class="row">
+      <div class="ten columns" style="margin-top: 5%">
+        <h1>I Have An Idea.</h1>
+        <p>For several days a week, you work in your unit/department/lab/other.  No one knows your job or workplace better than you do.  It's very probable that you have some ideas about how to make your job or department better.  Whether it's a process improvement or technology development, we want your ideas!  Don't be shy - an idea unshared is an idea unrealized.</p>
+        <form class="idea_form" action="" method="post" name="idea_form">
+        <label for="idea">My Idea Is:</label>
+        <textarea name="idea" cols="50" rows="10"></textarea>
+        <label for="fullname">My Name Is ( you don't have to tell us, but it makes it easier to follow up if we need to ):</label>
+        <input type="text" name="fullname">
+      </div>
+    </div>
+    <div class="row">
+      <div class="five columns">
+        <label for="email">Email ( you don't have to tell us this, either ):</label>
+        <input type="email" name="email">
+      </div>
+      <div class="five-columns">
+        <label for="department">Department/Lab/Unit This Might Benefit:</label>
+        <input type="text" name="department">
+      </div>
+      <div class="row">
+        <div class="ten columns">
+        <input class="button-primary" type="submit" value="Share My Idea">
+        <p><small>This is a tool for constructive ideas, not a place to complain.  In other words, be sure you are submitting a change, suggestion or innovation - not just complaining about the lack of one.  If you have an issue with an individual, or something going on that warrants immediate intervention for your safety or the safety of others - this isn't the right resource.  Please contact HR or your immediate supervisor if you have those types of concerns.  Those problems shouldn't be ignored!</small></p>
+        </div>
+        </form>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
