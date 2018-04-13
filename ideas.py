@@ -3,6 +3,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import flash
+from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
@@ -29,7 +30,7 @@ class ConfigClass(object):
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
-""" Define the app and the db """
+#Define the app and the db
 
 app=Flask(__name__)
 app.config.from_object(__name__+'.ConfigClass')
@@ -40,7 +41,7 @@ except: pass
 mail=Mail(app)
 db=SQLAlchemy(app)
 
-""" Define the models """
+
 # Define the User data model. Make sure to add flask_user UserMixin!!
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,15 +72,17 @@ class UserRoles(db.Model):
 
 class Idea(db.Model):
 	id=db.Column(db.Integer,primary_key=True)
+	title=db.Column(db.String(80))
 	description=db.Column(db.Text)
 	fullname=db.Column(db.String(80))
 	email=db.Column(db.String(80))
 	department=db.Column(db.String(80))
 	total_votes=db.Column(db.Integer)
+	accepted=db.Column(db.Boolean, default=False, nullable=False)
 	votes=db.relationship('Vote',backref='idea',lazy=True)
 
 	def __repr__(self):
-		return '<Idea %r>' % self.descritption
+		return '<Idea %r>' % self.title
 
 class Vote(db.Model):
 	id=db.Column(db.Integer,primary_key=True)
@@ -91,8 +94,11 @@ class Vote(db.Model):
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
 
+# Reset the whole DATABASE
+db.drop_all()
+db.create_all()
 
-    # Create 'user007' user with 'secret' and 'agent' roles
+# Create 'user007' user with 'secret' and 'agent' roles
 if not User.query.filter(User.username=='user007').first():
 	user1 = User(username='user007', email='user007@example.com', active=True,password=user_manager.hash_password('Password1'))
 	user1.roles.append(Role(name='secret'))
@@ -100,16 +106,19 @@ if not User.query.filter(User.username=='user007').first():
 	db.session.add(user1)
 	db.session.commit()
 
+
 """ Define the routes and mechanics """
 
 @app.route('/', methods=['GET','POST'])
 def home():
 	if request.method=='POST':
+		title = request.form['title']
 		idea = request.form['idea']
 		fullname = request.form['fullname']
 		email = request.form['email']
 		department = request.form['department']
-		newidea = Idea(description=idea,fullname=fullname,email=email,department=department)
+		total_votes = 0
+		newidea = Idea(title=title,description=idea,fullname=fullname,email=email,department=department,total_votes=0,accepted=False)
 		db.session.add(newidea)
 		db.session.commit()
 		flash('Idea added!  Thanks!')
@@ -128,7 +137,29 @@ def faq():
 def feedback():
 	return render_template('feedback.html')
 
-@app.route('/vote.html')
+@app.route('/vote', methods=['GET','POST'])
 def vote():
+	ipaddr = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 	all_ideas = Idea.query.all()
-	return render_template('vote.html', all_ideas = all_ideas)
+
+	for idea in all_ideas:
+		for vote in idea.votes:
+			if vote.ipaddress == ipaddr:
+				idea.voted="yes"
+
+	return render_template('vote.html', all_ideas = all_ideas, ipaddress=ipaddr)
+
+@app.route('/makevote',)
+def makevote():
+	ipaddr = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+	idea_id = request.args.get('idea_id',0,type=int)
+	vote_state = 1
+	vote = Vote(ipaddress=ipaddr,idea_id=idea_id, vote_state=vote_state)
+	thisidea = Idea.query.filter_by(id=idea_id).first()
+	if thisidea.total_votes == None:
+		thisidea.total_votes = 0
+	thisidea.total_votes = thisidea.total_votes+1
+	totalvotes = thisidea.total_votes
+	db.session.add(vote)
+	db.session.commit()
+	return jsonify(result=idea_id, totalvotes=totalvotes)

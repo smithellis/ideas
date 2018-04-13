@@ -13,18 +13,40 @@
     {% for idea in all_ideas %}
     <div class="row">
       <div class="eight columns">
-        <h2>Title</h2>
+        <h2>{{ idea.title }}</h2>
         <p>{{ idea.description }}<p>
       </div>
       <div class="two columns">
-        <p><a href="" class="button button-primary">Vote For This!</a></p>
-        <p class="votes">62 Votes!</p>
+      {% if idea.voted=="yes" %}
+      <p>You Already Voted On This!</p>
+      {% else %}
+        <p><button class="button button-primary votebutton" name="{{ idea.id }}">Vote For This!</button></p>
+      {% endif %}
+        <div class="{{ idea.id }}">TOTAL VOTES: {{ idea.total_votes }}</div>
+
       </div>
     </div>
     <hr>
     {% endfor %}
         <!-- Idea End -->
-        
+
 </div>
 
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script>
+$(function() {
+  $('.votebutton').bind('click', function() {
+    $.getJSON($SCRIPT_ROOT + '/makevote', {
+      idea_id: $(this).attr("name")
+    }, function(data) {
+      $("."+data.result).text("TOTAL VOTES: " + data.totalvotes);
+      $('.votebutton').text("Got It!");
+    });
+    $(this).off();
+    return false;
+  });
+});
+</script>
 {% endblock %}

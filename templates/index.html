@@ -7,6 +7,8 @@
         <h1>I Have An Idea.</h1>
         <p>For several days a week, you work in your unit/department/lab/other.  No one knows your job or workplace better than you do.  It's very probable that you have some ideas about how to make your job or department better.  Whether it's a process improvement or technology development, we want your ideas!  Don't be shy - an idea unshared is an idea unrealized.</p>
         <form class="idea_form" action="/" method="post" name="idea_form">
+        <label for="title">Idea Title:</label>
+        <input type="text" name="title">
         <label for="idea">My Idea Is:</label>
         <textarea name="idea" cols="50" rows="10"></textarea>
         <label for="fullname">My Name Is ( you don't have to tell us, but it makes it easier to follow up if we need to ):</label>
@@ -14,11 +16,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="five columns">
+      <div class="ten columns">
         <label for="email">Email ( you don't have to tell us this, either ):</label>
         <input type="email" name="email">
       </div>
-      <div class="five-columns">
+    </div>
+    <div class="row">
+      <div class="ten columns">
         <label for="department">Department/Lab/Unit This Might Benefit:</label>
         <input type="text" name="department">
       </div>
