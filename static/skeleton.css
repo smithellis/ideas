@@ -466,8 +466,18 @@ _____________________*/
 }
 .footpart {
   padding: 5px;
-  
+
 }
+
+
+/* Flash */
+.flash {
+  display: block;
+  padding: 10px;
+  background-color: #fcf8a6;
+}
+
+
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
