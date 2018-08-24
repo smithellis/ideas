@@ -18,7 +18,7 @@
       </div>
       <div class="two columns">
       {% if idea.voted=="yes" %}
-      <p>You Already Voted On This!</p>
+      <p><button class="button button-primary votebutton" name="{{ idea.id }}" disabled>You Already Voted!</button></p>
       {% else %}
         <p><button class="button button-primary votebutton" name="{{ idea.id }}">Vote For This!</button></p>
       {% endif %}

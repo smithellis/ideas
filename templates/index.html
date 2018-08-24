@@ -4,14 +4,17 @@
   <div class="container">
     <div class="row">
       <div class="ten columns" style="margin-top: 5%">
-        <h1>I Have An Idea.</h1>
-        <p>For several days a week, you work in your unit/department/lab/other.  No one knows your job or workplace better than you do.  It's very probable that you have some ideas about how to make your job or department better.  Whether it's a process improvement or technology development, we want your ideas!  Don't be shy - an idea unshared is an idea unrealized.</p>
+        <h1>You Have An Idea.</h1>
+        <p>For several days a week, you work in your unit/department/lab/area.  No one knows your job or workplace better than you do.  It's very probable that you have some ideas about how to make your job or department better.  Whether it's a process improvement or technology development, we want your ideas!  Don't be shy - an idea unshared is an idea unrealized.</p>
+        <p>If you choose not to give us your email or your name, we still want your idea.  If you are nervous about sharing, then do it anonymously - but still share!  Nothing improves if no one is working on it.</p>
+        <p><img src="{{ url_for('static', filename='Diagram.png') }}" alt="How this works" class="img-responsive"></p>
+        <h2>Ready?  Give us your idea!</h2>
         <form class="idea_form" action="/" method="post" name="idea_form">
         <label for="title">Idea Title:</label>
         <input type="text" name="title">
         <label for="idea">My Idea Is:</label>
         <textarea name="idea" cols="50" rows="10"></textarea>
-        <label for="fullname">My Name Is ( you don't have to tell us, but it makes it easier to follow up if we need to ):</label>
+        <label for="fullname">Name: ( you don't have to tell us, but it makes it easier to follow up if we need to ):</label>
         <input type="text" name="fullname">
       </div>
     </div>
