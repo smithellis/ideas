@@ -87,7 +87,8 @@ class Idea(db.Model):
     email=db.Column(db.String(80))
     department=db.Column(db.String(80))
     total_votes=db.Column(db.Integer)
-    accepted=db.Column(db.Boolean, default=False, nullable=False)
+    canbevoted=db.Column(db.Boolean, default=False, nullable=False)
+    ideaaccepted=db.Column(db.Boolean, default=False, nullable=False)
     votes=db.relationship('Vote',backref='idea',lazy=True)
 
     def __repr__(self):
@@ -139,7 +140,7 @@ def home():
         email = request.form['email']
         department = request.form['department']
         total_votes = 0
-        newidea = Idea(title=title,description=idea,fullname=fullname,email=email,department=department,total_votes=0,accepted=False)
+        newidea = Idea(title=title,description=idea,fullname=fullname,email=email,department=department,canbevoted=False,total_votes=0,ideaaccepted=False)
         db.session.add(newidea)
         db.session.commit()
         flash('Got it!  We have added your idea.  An administrator will take a look, and if it appears authentic, it will get approved and become available for the voting process.  This step happens so we can avoid spam - it is difficult to allow anonymous submissions without getting a bit of spam.')
@@ -167,7 +168,6 @@ def vote():
         for vote in idea.votes:
             if vote.userid == userid:
                 idea.voted="yes"
-
     return render_template('vote.html', all_ideas = all_ideas, userid=userid, ipaddress=ipaddr)
 
 @app.route('/makevote',)
