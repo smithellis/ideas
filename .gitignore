@@ -40,3 +40,9 @@ Thumbs.db
 ###################
 
 *.pyc
+
+.env
+.flaskenv
+venv/
+.venv/
+.vscode
